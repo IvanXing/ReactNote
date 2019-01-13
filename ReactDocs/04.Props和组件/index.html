@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04.Props&组件</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        let appContainer = document.getElementById("app")
+        //1.通过变量名称定义  不是组件 是一个实例
+        const welcome1 = <h1>Hello, React</h1> 
+        //2.函数方式的组件
+        function Welcome2(props) {
+            //console.log('props->', props)
+            return <h1>Hello, {props.name}, {props.learning}</h1>;
+        }
+        //3.ES6 class定义组件
+        class Welcome3 extends React.Component {
+            render() {
+                //const props = this.props //从属性中取出来
+                return <h1>Hello, {this.props.name}</h1>
+            }
+        }
+        ReactDOM.render(
+            <div>
+                {welcome1}
+                <Welcome2 name="Sara2" learning="React2"/>
+                <Welcome3 name="Sara3" learning="React3"/>
+            </div>,
+            
+            appContainer
+            );
+    </script>
+</body>
+</html>
