@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05 生命周期</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+
+        // 实现内部更新 constructor => render => componentDidMount
+        class Clock extends React.Component {
+            constructor(props) {    //构造函数只调用一次
+                console.log('constructor')
+                super(props);
+                this.state = {date: new Date()};
+            }
+
+            tick() {
+                console.log('tick')
+                this.setState({       //调用一次setState比较一次DOM
+                    date: new Date()
+                })
+            }
+
+            componentWillUnmount() {
+                console.log('componentWillUnmount');
+                clearInterval(this.timerID);
+            }
+
+            componentDidMount() {
+                console.log('componentDidMount');
+                this.timerID = setInterval(() => {
+                    this.tick()
+                }, 1000);
+            }
+
+
+            render() {
+                console.log('render');
+                const {date} = this.state;
+                return (
+                     <div>
+                        <h1>Hello, world!</h1>
+                         <h2>It is {date.toLocaleTimeString()}.</h2>
+                     </div>
+                );
+             }
+        }
+
+        ReactDOM.render(
+            <Clock />,
+            document.getElementById("app")
+        );
+
+
+    </script>
+</body>
+</html>
