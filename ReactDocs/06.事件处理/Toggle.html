@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0602.Toggle</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        let appContainer = document.getElementById("app");
+
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {isToggleOn: true};
+                // This binding is necessary to make `this` work in the callback
+                this.handleClick = this.handleClick.bind(this);
+            }
+            handleClick() {
+                this.setState(prevState => ({
+                    isToggleOn: !prevState.isToggleOn
+                }));
+            }
+            render() {
+                return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isToggleOn ? 'ON' : 'OFF'}
+                    </button>
+                );
+            }
+        }
+
+        //bind解决方法
+        //this.handleClick = this.handleClick.bind(this);
+        //handleClick=()=>{}  箭头函数自带上下文绑定
+        //onClick={this.handleClick.bind(this)}   上文就不要写箭头函数
+        
+        ReactDOM.render(
+            <Toggle />, 
+            appContainer
+        );
+    </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>01.GettingStarted</title>
+    <title>06.Handling Events</title>
 </head>
 <body>
     <div id="app"></div>
@@ -11,11 +11,24 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script type="text/babel">
         let appContainer = document.getElementById("app");
-        ReactDOM.render(<h1>Hello,React</h1>, appContainer);
+
+        class Button extends React.Component {
+            doClick() {
+                alert('Do Click')
+            }
+            render() {
+                return (
+                    <button onClick={ this.doClick }>
+                        Click Me
+                    </button>
+                )
+            }
+        }
+        
+        ReactDOM.render(
+            <Button />, 
+            appContainer
+        );
     </script>
-<!-- 
-    version:16.7.0
-    babel的引入以及type="text/babel"
-    getting started -->
 </body>
 </html>
